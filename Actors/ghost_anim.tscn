@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c1mt4trwiawvj"]
+
+[ext_resource type="Script" path="res://Actors/GhostAnim.gd" id="1_lwoam"]
+
+[node name="GhostAnim" type="Sprite2D"]
+script = ExtResource("1_lwoam")

@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://jm3gljo8lfgy"]
+
+[ext_resource type="Script" path="res://Actors/objects/Moving Block/Moving_Block.gd" id="1_sxxr2"]
+[ext_resource type="Texture2D" uid="uid://delpeho1l4ndb" path="res://Graphics/autotile_template_3x3_minimal.png" id="2_idqrt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jdygp"]
+size = Vector2(32, 32)
+
+[node name="Moving Block" type="Node2D" node_paths=PackedStringArray("anima_body")]
+script = ExtResource("1_sxxr2")
+anima_body = NodePath("AnimatableBody2D")
+
+[node name="AnimatableBody2D" type="AnimatableBody2D" parent="."]
+collision_mask = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="AnimatableBody2D"]
+texture = ExtResource("2_idqrt")
+region_enabled = true
+region_rect = Rect2(16, 32, 32, 32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D"]
+shape = SubResource("RectangleShape2D_jdygp")

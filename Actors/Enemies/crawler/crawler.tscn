@@ -1,0 +1,69 @@
+[gd_scene load_steps=9 format=3 uid="uid://blqrsikjk3th7"]
+
+[ext_resource type="Script" path="res://Crawler.gd" id="1_a8eph"]
+[ext_resource type="Texture2D" uid="uid://bdm0fggw30vk8" path="res://Graphics/enemy_crawler.png" id="2_7h6oq"]
+[ext_resource type="Script" path="res://components/move_component.gd" id="2_e5gek"]
+[ext_resource type="Script" path="res://components/crawler_component.gd" id="3_6jjcj"]
+[ext_resource type="Script" path="res://components/gravity_component.gd" id="3_sscje"]
+[ext_resource type="Script" path="res://components/health_component.gd" id="4_7lq6p"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8voom"]
+size = Vector2(16, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ouccs"]
+size = Vector2(2, 2)
+
+[node name="Crawler" type="StaticBody2D" node_paths=PackedStringArray("gravity_component", "health_component", "move_component", "crawler_component")]
+light_mask = 0
+collision_layer = 32
+collision_mask = 2
+script = ExtResource("1_a8eph")
+gravity_component = NodePath("GravityComponent")
+health_component = NodePath("HealthComponent")
+move_component = NodePath("MoveComponent")
+crawler_component = NodePath("CrawlerComponent")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -8)
+texture = ExtResource("2_7h6oq")
+
+[node name="CrawlerComponent" type="Node" parent="." node_paths=PackedStringArray("wall_detectR", "wall_detectL", "floor_detectR", "floor_detectL")]
+script = ExtResource("3_6jjcj")
+wall_detectR = NodePath("../RightWallCast")
+wall_detectL = NodePath("../LeftWallCast")
+floor_detectR = NodePath("../RightFloorCheck")
+floor_detectL = NodePath("../LeftFloorCheck")
+
+[node name="GravityComponent" type="Node" parent="."]
+script = ExtResource("3_sscje")
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("4_7lq6p")
+health = 5
+
+[node name="MoveComponent" type="Node" parent="."]
+script = ExtResource("2_e5gek")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -7)
+shape = SubResource("RectangleShape2D_8voom")
+
+[node name="RightFloorCheck" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightFloorCheck"]
+position = Vector2(9, 1)
+shape = SubResource("RectangleShape2D_ouccs")
+
+[node name="LeftFloorCheck" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftFloorCheck"]
+position = Vector2(-9, 1)
+shape = SubResource("RectangleShape2D_ouccs")
+
+[node name="LeftWallCast" type="RayCast2D" parent="."]
+position = Vector2(0, -7)
+target_position = Vector2(-11, 0)
+
+[node name="RightWallCast" type="RayCast2D" parent="."]
+position = Vector2(0, -7)
+target_position = Vector2(11, 0)

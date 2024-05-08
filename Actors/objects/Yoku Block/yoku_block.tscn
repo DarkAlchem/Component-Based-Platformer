@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://bsejrmpsy3cl4"]
+
+[ext_resource type="Script" path="res://Actors/objects/Yoku Block/yoku_block.gd" id="1_pstbp"]
+[ext_resource type="Texture2D" uid="uid://delpeho1l4ndb" path="res://Graphics/autotile_template_3x3_minimal.png" id="1_vb4pv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nddf2"]
+size = Vector2(16, 16)
+
+[node name="Yoku Block" type="StaticBody2D"]
+collision_mask = 0
+script = ExtResource("1_pstbp")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_vb4pv")
+region_enabled = true
+region_rect = Rect2(2.08165e-12, 48, 16, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+unique_name_in_owner = true
+shape = SubResource("RectangleShape2D_nddf2")

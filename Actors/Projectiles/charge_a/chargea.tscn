@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=3 uid="uid://8fulfg6e6utn"]
+
+[ext_resource type="Script" path="res://Actors/Projectiles/lemon/lemon.gd" id="1_nl8e4"]
+[ext_resource type="Texture2D" uid="uid://b2k7insl5uymm" path="res://Graphics/ShotlvlA.png" id="2_1d6h6"]
+[ext_resource type="Script" path="res://components/scale_component.gd" id="3_jhyvd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lqvih"]
+size = Vector2(17, 7)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2iida"]
+
+[node name="ChargeA" type="StaticBody2D" node_paths=PackedStringArray("sprite", "scale_component", "screen_notifier", "hitbox_collider")]
+collision_layer = 64
+collision_mask = 33
+script = ExtResource("1_nl8e4")
+sprite = NodePath("AnimatedSprite2D")
+scale_component = NodePath("ScaleComponent")
+screen_notifier = NodePath("VisibleOnScreenNotifier2D")
+hitbox_collider = NodePath("Area2D")
+speed = 280.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1.5, -0.5)
+shape = SubResource("RectangleShape2D_lqvih")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 64
+collision_mask = 33
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_2iida")
+
+[node name="AnimatedSprite2D" type="Sprite2D" parent="."]
+position = Vector2(2, 0)
+texture = ExtResource("2_1d6h6")
+offset = Vector2(2.08165e-12, 0.5)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(1.5, -0.5)
+scale = Vector2(0.85, 0.35)
+
+[node name="ScaleComponent" type="Node" parent="." node_paths=PackedStringArray("sprite")]
+script = ExtResource("3_jhyvd")
+sprite = NodePath("../AnimatedSprite2D")

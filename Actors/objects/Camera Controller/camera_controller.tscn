@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://b5xjmo3yalfku"]
+
+[ext_resource type="Script" path="res://Camera Controller.gd" id="1_yi4ic"]
+
+[node name="Camera Controller" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_yi4ic")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
